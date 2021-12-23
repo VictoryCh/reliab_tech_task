@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+
+    <changeSet id="01-create_table_role:create_sequence" author="${author}">
+        <createSequence sequenceName="role_id_seq" startValue="4" incrementBy="1"/>
+    </changeSet>
+
+    <changeSet id="01-create_table_role:create_table" author="${author}">
+        <createTable tableName="role" remarks="Роли">
+            <column name="id" type="bigint" remarks="ID роли" defaultValueSequenceNext="role_id_seq">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="role_id_pkey"/>
+            </column>
+            <column name="code" type="VARCHAR(100)" remarks="Код роли"/>
+            <column name="description" type="text" remarks="Название роли"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="01-create_table:insert_data" author="${author}">
+        <loadData tableName="role"
+                  separator=";"
+                  relativeToChangelogFile="true"
+                  file="data/insert_role.csv"/>
+    </changeSet>
+
+
+</databaseChangeLog>

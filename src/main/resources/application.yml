@@ -12,7 +12,7 @@ spring:
 
   datasource:
     driverClassName: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/rkk?currentSchema=${db.databaseSchema}
+    url: jdbc:postgresql://localhost:5432/postgres?currentSchema=${db.databaseSchema}
     username: ${db.username}
     password: ${db.password}
 
