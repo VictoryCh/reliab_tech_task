@@ -1,0 +1,26 @@
+db:
+  databaseSchema: public
+  username: postgres
+  password: postgres
+
+spring:
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
+
+  datasource:
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/rkk?currentSchema=${db.databaseSchema}
+    username: ${db.username}
+    password: ${db.password}
+
+  liquibase:
+    enabled: true
+    drop-first: false
+    parameters:
+      schema: ${db.databaseSchema}
+    default-schema: ${spring.liquibase.parameters.schema}
+    liquibase-schema: ${spring.liquibase.parameters.schema}
+    change-log: classpath:db/changelog/db_changelog.xml
